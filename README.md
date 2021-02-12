@@ -6,13 +6,13 @@ In this unit, coders will create a Playlist. The Playlist will display a list of
 ## Day 1
 
 #### Planning
-- [ ] Complete the project planning document.
+- [x] Complete the project planning document.
 #### Set-Up
 - [x] Go to the repository
-- [ ] Fork this repository to your github account and clone to a new workspace
-- [ ] Add, commit, and push your changes
-- [ ] Make your site live on gh-pages
-- [ ] Submit your website using the link on the Agenda
+- [x] Fork this repository to your github account and clone to a new workspace
+- [x] Add, commit, and push your changes
+- [x] Make your site live on gh-pages
+- [x] Submit your website using the link on the Agenda
 
 ### HTML
 - [ ] Create a div to display your songs
