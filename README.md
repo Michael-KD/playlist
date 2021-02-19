@@ -15,32 +15,32 @@ In this unit, coders will create a Playlist. The Playlist will display a list of
 - [x] Submit your website using the link on the Agenda
 
 ### HTML
-- [ ] Create a div to display your songs
+- [x] Create a div to display your songs
 
 ### JavaScript
-- [ ] Create an array to store your song names
-- [ ] Repeat these steps for song artist, song length, image, and link
+- [x] Create an array to store your song names
+- [x] Repeat these steps for song artist, song length, image, and link
 
 ### Wrap
-- [ ] Push your changes!
+- [x] Push your changes!
 
 ## Day 2
 
 ### JavaScript
-- [ ] Create a loop to display your song names
-- [ ] Repeat these steps for song artist, song length, image, and link
+- [x] Create a loop to display your song names
+- [x] Repeat these steps for song artist, song length, image, and link
 
 ### Wrap
-- [ ] Push your changes!
+- [x] Push your changes!
 
 ## Day 3
 
 ## JavaScript
-- [ ] Add song information to your list using .push()
-- [ ] Create a working click handler that retrieves user input, pushes new items to your song arrays, and displays the result to the screen
+- [x] Add song information to your list using .push()
+- [x] Create a working click handler that retrieves user input, pushes new items to your song arrays, and displays the result to the screen
 
 #### Wrap
-- [ ] Push your changes!
+- [x] Push your changes!
 
 ## Day 4
 
