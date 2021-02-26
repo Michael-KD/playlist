@@ -18,7 +18,7 @@
       <input id="artist" placeholder="Artist">
       <input id="length" placeholder="Length">
       <input id="picture-link" placeholder="Picture Link">
-      <input id="song-link" placeholder="Song Link">
+      <input id="song-link" placeholder="Song Link, Include the whole url!">
       <button class="submit">Add Song!</button>
     
 <br><br><br>
@@ -28,6 +28,7 @@
       <table id="main-table">
         <thead>
         <tr>
+          <th>Row Number</th>
           <th>Song Name</th>
           <th>Artist</th>
           <th>Length</th>
@@ -37,6 +38,7 @@
        </thead>   
        <tbody id="table-body"> 
         <tr>
+          <td>This is the row number!</td>
           <td>Your song name will go here!</td>
           <td>The artist's name will go here!</td>
           <td>The song length will go here!</td>
@@ -46,25 +48,21 @@
        </tbody>  
       </table>
       <br>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/hpRQo0yD-FU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+      <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/hpRQo0yD-FU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    --></div>
+    <input class="deleteInput" placeholder="Put the number of the song you want to delete here!" size="34">
+    <button class="delete">Delete a Song</button>
+    
+    
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-    <!-- Your Javascript -->
-    <script src="js/script.js"></script>
+<!--     Your Javascript -->
+    <script type="module" src="js/script.js"></script>
   </body>
 </html>
 
 
 
 <!--
-https://www.youtube.com/watch?v=Mn0JY2IcPrc&ab_channel=NatureClip%3AFreeStockFootage
-https://www.youtube.com/watch?v=hpRQo0yD-FU&ab_channel=NatureClip%3AFreeStockFootage
-
-
-cut off 32 at start
-
-grab next 11
-
-https://www.youtube.com/embed/
-  -->
+- Use local/session storage to save song names after refresh
+-->
