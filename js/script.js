@@ -1,11 +1,38 @@
-import anything from './test.js';
-
-console.log(anything);
 let songNamesArray = []
 let artistsArray = []
 let lengthsArray = []
 let imagesArray = []
 let songLinksArray = []
+let isReloaded = false;
+
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  isReloaded = true;
+} else {
+  isReloaded = false
+}
+
+
+let test = JSON.parse(localStorage.getItem("songNamesArrayJSON"));
+
+if (test == null){}
+else {
+
+songNamesArray = JSON.parse(localStorage.getItem("songNamesArrayJSON"));
+artistsArray = JSON.parse(localStorage.getItem("artistsArrayJSON"));
+lengthsArray = JSON.parse(localStorage.getItem("lengthsArrayJSON"));
+imagesArray = JSON.parse(localStorage.getItem("imagesArrayJSON"));
+songLinksArray = JSON.parse(localStorage.getItem("songLinksArrayJSON"));
+
+}
+
+function addLocalStorage() {
+  
+  if (isReloaded == true) {
+    makeTableWork();
+    isReloaded = false;
+  } 
+  else {}
+}
 
 
 function appendArrays() {
@@ -21,7 +48,14 @@ function appendArrays() {
     lengthsArray.push(length);
     imagesArray.push(image);
     songLinksArray.push(link);
-    //console.log(songNamesArray);
+
+    
+    localStorage.setItem("songNamesArrayJSON", JSON.stringify(songNamesArray));
+    localStorage.setItem("artistsArrayJSON", JSON.stringify(artistsArray));
+    localStorage.setItem("lengthsArrayJSON", JSON.stringify(lengthsArray));
+    localStorage.setItem("imagesArrayJSON", JSON.stringify(imagesArray));
+    localStorage.setItem("songLinksArrayJSON", JSON.stringify(songLinksArray));
+
   }
   else {}
 }
@@ -39,7 +73,6 @@ function addRows(item) {
   
   cell1.innerHTML = item;
   let rowIndex = songNamesArray.lastIndexOf(item); 
-  console.log(rowIndex);
   cell2.innerHTML = artistsArray[rowIndex];
   cell3.innerHTML = lengthsArray[rowIndex];
   cellNumber.innerHTML = parseInt(rowIndex) +1;
@@ -51,18 +84,13 @@ function addRows(item) {
   
   
   let linkForTable = songLinksArray[rowIndex];
-    console.log(linkForTable);
   linkForTable = linkForTable.slice(32);
-    console.log(linkForTable);
   let linkForTableRaw = linkForTable.slice(0, 11);
-    console.log(linkForTable);
   let linkForTableYoutube = 'https://www.youtube.com/embed/' + linkForTableRaw;
-    console.log(linkForTable);
   
   if (linkForTableRaw.length !== 11) {cell5.innerHTML = "";}
   else {
     cell5.innerHTML = `<iframe width="560" height="315" src='${linkForTableYoutube}' frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-      console.log(cell5.innerHTML);
   } 
 }
 
@@ -98,9 +126,13 @@ function deleteTableItem() {
 
 document.querySelector(".submit").onclick=function(){
   makeTableWork();
-  //console.log(songNamesArray);
+  sessionStorage.setItem("reload-check", "test1");
 };
 
 document.querySelector(".delete").onclick=function(){
   deleteTableItem();
+};
+
+document.querySelector(".localadd").onclick=function(){
+  addLocalStorage();
 };
