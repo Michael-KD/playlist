@@ -1,14 +1,18 @@
-//ARRAY CODE//
+//OBJECT CODE//
 
 
 //INITIALIZE VARIABLES
+let allSongsArray = [];
+
 let songNamesArray = []
 let artistsArray = []
 let lengthsArray = []
 let imagesArray = []
 let songLinksArray = []
 let isReloaded = false;
+let numSongs = -1;
 //////////////////////
+
 
 //CHECK IF RELOADED
 if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
@@ -18,31 +22,31 @@ if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
 }
 ////////////////////
 
-//GET ITEMS FROM LOCAL STORAGE
-let test = JSON.parse(localStorage.getItem("songNamesArrayJSON"));
+// //GET ITEMS FROM LOCAL STORAGE
+// let test = JSON.parse(localStorage.getItem("songNamesArrayJSON"));
 
-if (test == null){}
-else {
+// if (test == null){}
+// else {
 
-songNamesArray = JSON.parse(localStorage.getItem("songNamesArrayJSON"));
-artistsArray = JSON.parse(localStorage.getItem("artistsArrayJSON"));
-lengthsArray = JSON.parse(localStorage.getItem("lengthsArrayJSON"));
-imagesArray = JSON.parse(localStorage.getItem("imagesArrayJSON"));
-songLinksArray = JSON.parse(localStorage.getItem("songLinksArrayJSON"));
+// songNamesArray = JSON.parse(localStorage.getItem("songNamesArrayJSON"));
+// artistsArray = JSON.parse(localStorage.getItem("artistsArrayJSON"));
+// lengthsArray = JSON.parse(localStorage.getItem("lengthsArrayJSON"));
+// imagesArray = JSON.parse(localStorage.getItem("imagesArrayJSON"));
+// songLinksArray = JSON.parse(localStorage.getItem("songLinksArrayJSON"));
 
-}
-///////////////////////////////
+// }
+// ///////////////////////////////
 
-//LOCAL STORAGE ADD BUTTON FUNCTION
-function addLocalStorage() {
+// //LOCAL STORAGE ADD BUTTON FUNCTION
+// function addLocalStorage() {
   
-  if (isReloaded == true) {
-    makeTableWork();
-    isReloaded = false;
-  } 
-  else {}
-}
-////////////////////////////////
+//   if (isReloaded == true) {
+//     makeTableWork();
+//     isReloaded = false;
+//   } 
+//   else {}
+// }
+// ////////////////////////////////
 
 //APPEND NEW INPUTS TO ARRAYS
 function appendArrays() {
@@ -53,19 +57,19 @@ function appendArrays() {
   let link = $("#song-link").val();
   
   if (name !== "") {
-    songNamesArray.push(name);
-    artistsArray.push(artist);
-    lengthsArray.push(length);
-    imagesArray.push(image);
-    songLinksArray.push(link);
+    numSongs = numSongs + 1;
+    allSongsArray[numSongs] = {"name": name, "artist": artist, "length": length, "image": image, "link": link}
+    console.log(allSongsArray);
+    
+  
 
-    //PUSH TO LOCAL STORAGE
-    localStorage.setItem("songNamesArrayJSON", JSON.stringify(songNamesArray));
-    localStorage.setItem("artistsArrayJSON", JSON.stringify(artistsArray));
-    localStorage.setItem("lengthsArrayJSON", JSON.stringify(lengthsArray));
-    localStorage.setItem("imagesArrayJSON", JSON.stringify(imagesArray));
-    localStorage.setItem("songLinksArrayJSON", JSON.stringify(songLinksArray));
-    ////////////////////////
+    // //PUSH TO LOCAL STORAGE
+    // localStorage.setItem("songNamesArrayJSON", JSON.stringify(songNamesArray));
+    // localStorage.setItem("artistsArrayJSON", JSON.stringify(artistsArray));
+    // localStorage.setItem("lengthsArrayJSON", JSON.stringify(lengthsArray));
+    // localStorage.setItem("imagesArrayJSON", JSON.stringify(imagesArray));
+    // localStorage.setItem("songLinksArrayJSON", JSON.stringify(songLinksArray));
+    // ////////////////////////
     
   }
   else {}
@@ -73,7 +77,7 @@ function appendArrays() {
 //////////////////////////
 
 //ADD ALL VALUES IN ARRAY TO TABLE
-function addRows(item) {
+function addRows(itemNum) {
   let table = document.getElementById("table-body");
   let row = table.insertRow(-1);
   
@@ -83,21 +87,20 @@ function addRows(item) {
   let cell3 = row.insertCell(3);
   let cell4 = row.insertCell(4);
   let cell5 = row.insertCell(5);
-  
-  cell1.innerHTML = item;
-  let rowIndex = songNamesArray.lastIndexOf(item); 
-  cell2.innerHTML = artistsArray[rowIndex];
-  cell3.innerHTML = lengthsArray[rowIndex];
-  cellNumber.innerHTML = parseInt(rowIndex) +1;
+  cell1.innerHTML = allSongsArray[itemNum]["name"];
+  let rowIndex = songNamesArray.lastIndexOf(itemNum); 
+  cell2.innerHTML = allSongsArray[itemNum]["song"];
+  cell3.innerHTML = allSongsArray[itemNum]["length"];
+  cellNumber.innerHTML = itemNum + 1;
   
   //ADD IMAGE INTO IMG TAG
-  let imageForTable = imagesArray[rowIndex];
+  let imageForTable = allSongsArray[itemNum]["image"];
   if (imageForTable === "") {cell4.innerHTML = "";}
   else {cell4.innerHTML = `<img src=${imageForTable} alt=${imageForTable}>`;}  
   ////////////////////////
   
   //IFRAME FOR YOUTUBE PLAYER
-  let linkForTable = songLinksArray[rowIndex];
+  let linkForTable = allSongsArray[itemNum]["link"];
   linkForTable = linkForTable.slice(32);
   let linkForTableRaw = linkForTable.slice(0, 11);
   let linkForTableYoutube = 'https://www.youtube.com/embed/' + linkForTableRaw;
@@ -118,8 +121,8 @@ function makeTableWork() {
   $("#main-table tbody tr").remove();
   //////////////////////////
   
-  for (let item of songNamesArray) {
-    addRows(item);
+  for (let itemNum in allSongsArray) {
+    addRows(itemNum);
   }
 }
 //////////////////////////////////////////
@@ -140,8 +143,8 @@ function deleteTableItem() {
   
   
   
-  for (let item of songNamesArray) {
-    addRows(item);
+  for (let itemNum in allSongsArray) {
+    addRows(itemNum);
   }
 }
 
@@ -158,8 +161,8 @@ document.querySelector(".delete").onclick=function(){
 };
 ///////////////
 
-//ADD LOCAL STORAGE ITEMS BUTTON
-document.querySelector(".localadd").onclick=function(){
-  addLocalStorage();
-};
-/////////////////////////////////
+// //ADD LOCAL STORAGE ITEMS BUTTON
+// document.querySelector(".localadd").onclick=function(){
+//   addLocalStorage();
+// };
+// /////////////////////////////////
