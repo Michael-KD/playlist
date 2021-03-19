@@ -123,7 +123,7 @@ function addRows(itemNum) {
   cell3.innerHTML = allSongsArray[itemNum]["length"];
   
   let rowNumber = parseInt(itemNum) + 1;
-  cellNumber.innerHTML = `<a href="javascript:deleteAlert(${rowNumber});">${rowNumber}</a>`;
+  cellNumber.innerHTML = `<a onclick="deleteAlert(${rowNumber})">${rowNumber}</a>`;
   
   //ADD IMAGE INTO IMG TAG
   let imageForTable = allSongsArray[itemNum]["image"];
