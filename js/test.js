@@ -3,15 +3,30 @@
 
 //INITIALIZE VARIABLES
 let allSongsArray = [];
-
+let allSongsArrayLocal;
 let songNamesArray = []
 let artistsArray = []
 let lengthsArray = []
 let imagesArray = []
 let songLinksArray = []
 let isReloaded = false;
-let numSongs = -1;
+let numSongs;
 //////////////////////
+
+function deleteAlert(int) {
+    var answer = confirm ("Please click on OK to delete your song.");
+    if (answer) {
+        $("#main-table tbody tr").remove();
+
+    let songToDeleteIndex = parseInt(int) - 1;
+    allSongsArray.splice(songToDeleteIndex, 1);
+  
+  //ADD ALL ROWS AGAIN
+  for (let itemNum in allSongsArray) {
+    addRows(itemNum);
+  }
+    }
+}
 
 
 //CHECK IF RELOADED
@@ -22,31 +37,43 @@ if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
 }
 ////////////////////
 
-// //GET ITEMS FROM LOCAL STORAGE
-// let test = JSON.parse(localStorage.getItem("songNamesArrayJSON"));
+//GET ITEMS FROM LOCAL STORAGE
+let test = JSON.parse(localStorage.getItem("allSongsArrayJSON"));
 
-// if (test == null){}
-// else {
+if (test == null){}
+else {
 
-// songNamesArray = JSON.parse(localStorage.getItem("songNamesArrayJSON"));
-// artistsArray = JSON.parse(localStorage.getItem("artistsArrayJSON"));
-// lengthsArray = JSON.parse(localStorage.getItem("lengthsArrayJSON"));
-// imagesArray = JSON.parse(localStorage.getItem("imagesArrayJSON"));
-// songLinksArray = JSON.parse(localStorage.getItem("songLinksArrayJSON"));
+// // songNamesArray = JSON.parse(localStorage.getItem("songNamesArrayJSON"));
+// // artistsArray = JSON.parse(localStorage.getItem("artistsArrayJSON"));
+// // lengthsArray = JSON.parse(localStorage.getItem("lengthsArrayJSON"));
+// // imagesArray = JSON.parse(localStorage.getItem("imagesArrayJSON"));
+// // songLinksArray = JSON.parse(localStorage.getItem("songLinksArrayJSON"));
+let allSongsArray = JSON.parse(localStorage.getItem("allSongsArrayJSON"));
+console.log(allSongsArray);
+}
+///////////////////////////////
 
-// }
-// ///////////////////////////////
-
-// //LOCAL STORAGE ADD BUTTON FUNCTION
-// function addLocalStorage() {
+//LOCAL STORAGE ADD BUTTON FUNCTION
+function addLocalStorage() {
   
-//   if (isReloaded == true) {
-//     makeTableWork();
-//     isReloaded = false;
-//   } 
-//   else {}
-// }
-// ////////////////////////////////
+  if (isReloaded == true) {
+    
+    // allSongsArray = allSongsArrayLocal;
+  
+  //REMOVE ALL ROWS IN TABLE
+  $("#main-table tbody tr").remove();
+  //////////////////////////
+  
+  for (let itemNum in allSongsArray) {
+    addRows(itemNum);
+  }  
+
+    isReloaded = false;
+  } 
+  else {
+  }
+}
+////////////////////////////////
 
 //APPEND NEW INPUTS TO ARRAYS
 function appendArrays() {
@@ -57,22 +84,25 @@ function appendArrays() {
   let link = $("#song-link").val();
   
   if (name !== "") {
-    numSongs = numSongs + 1;
-    allSongsArray[numSongs] = {"name": name, "artist": artist, "length": length, "image": image, "link": link}
-    console.log(allSongsArray);
+    numSongs = allSongsArray.length;
+    console.log(numSongs);
+    allSongsArray[numSongs] = {"name": name, "artist": artist, "length": length, "image": image, "link": link};
     
   
 
-    // //PUSH TO LOCAL STORAGE
+    //PUSH TO LOCAL STORAGE
     // localStorage.setItem("songNamesArrayJSON", JSON.stringify(songNamesArray));
     // localStorage.setItem("artistsArrayJSON", JSON.stringify(artistsArray));
     // localStorage.setItem("lengthsArrayJSON", JSON.stringify(lengthsArray));
     // localStorage.setItem("imagesArrayJSON", JSON.stringify(imagesArray));
     // localStorage.setItem("songLinksArrayJSON", JSON.stringify(songLinksArray));
-    // ////////////////////////
+    localStorage.setItem("allSongsArrayJSON", JSON.stringify(allSongsArray));
+    ////////////////////////
     
   }
-  else {}
+  else {
+    
+  }
 }
 //////////////////////////
 
@@ -91,7 +121,9 @@ function addRows(itemNum) {
   let rowIndex = songNamesArray.lastIndexOf(itemNum); 
   cell2.innerHTML = allSongsArray[itemNum]["song"];
   cell3.innerHTML = allSongsArray[itemNum]["length"];
-  cellNumber.innerHTML = itemNum + 1;
+  
+  let rowNumber = parseInt(itemNum) + 1;
+  cellNumber.innerHTML = `<a href="javascript:deleteAlert(${rowNumber});">${rowNumber}</a>`;
   
   //ADD IMAGE INTO IMG TAG
   let imageForTable = allSongsArray[itemNum]["image"];
@@ -123,30 +155,27 @@ function makeTableWork() {
   
   for (let itemNum in allSongsArray) {
     addRows(itemNum);
-  }
+  }  
 }
 //////////////////////////////////////////
 
 //DELETE A ROW ON THE TABLE
-function deleteTableItem() {
+function deleteTableItem(rowNum) {
   let songToDelete = $(".deleteInput").val();
   let songToDeleteIndex = parseInt(songToDelete) - 1;
-  console.log(songToDeleteIndex);
+  //REMOVE ALL ROWS
   $("#main-table tbody tr").remove();
+  /////////////////
+
+  allSongsArray.splice(songToDeleteIndex, 1);
   
-  songNamesArray.splice(songToDeleteIndex, 1);
-  artistsArray.splice(songToDeleteIndex, 1);
-  lengthsArray.splice(songToDeleteIndex, 1);
-  imagesArray.splice(songToDeleteIndex, 1);
-  songLinksArray.splice(songToDeleteIndex, 1); 
-////////////////////////////  
-  
-  
-  
+  //ADD ALL ROWS AGAIN
   for (let itemNum in allSongsArray) {
     addRows(itemNum);
   }
+  ////////////////////
 }
+//////////////////////////// 
 
 //ADD SONGS BUTTON
 document.querySelector(".submit").onclick=function(){
@@ -161,8 +190,9 @@ document.querySelector(".delete").onclick=function(){
 };
 ///////////////
 
-// //ADD LOCAL STORAGE ITEMS BUTTON
-// document.querySelector(".localadd").onclick=function(){
-//   addLocalStorage();
-// };
-// /////////////////////////////////
+//ADD LOCAL STORAGE ITEMS BUTTON
+document.querySelector(".localadd").onclick=function(){
+  addLocalStorage();
+};
+/////////////////////////////////
+
