@@ -1,17 +1,70 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title> Playlist Project! </title>
-        <!-- Your CSS -->
-        <link type="text/css" rel="stylesheet" href="css/style.css" />
-    </head>
-    <body>
-        
-        
-        
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-        <!-- Your Javascript -->
-        <script src="js/script.js"></script>
-    </body>
+  <head>
+    <title>Playlist Project!</title>
+    <!-- Your CSS -->
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    
+ <!--   <div class="main">
+      <div class="song-names">song-names</div>
+      <div class="artists">artists</div>
+      <div class="length">length</div>
+      <div class="image">image</div>
+      <div class="link">link</div>
+-->
+      <input id="song-name" placeholder="Song Name">
+      <input id="artist" placeholder="Artist">
+      <input id="length" placeholder="Length">
+      <input id="picture-link" placeholder="Picture Link">
+      <input id="song-link" placeholder="Song Link, Include the whole url!">
+      <button class="submit">Add Song!</button>
+    
+<br><br><br>
+    
+    
+    <div class="main">
+      <table id="main-table">
+        <thead>
+        <tr>
+          <th>Row Number</th>
+          <th>Song Name</th>
+          <th>Artist</th>
+          <th>Length</th>
+          <th>Picture</th>
+          <th>Link</th>
+        </tr>
+       </thead>   
+       <tbody id="table-body"> 
+        <tr>
+          <td>This is the row number!</td>
+          <td>Your song name will go here!</td>
+          <td>The artist's name will go here!</td>
+          <td>The song length will go here!</td>
+          <td>Your image will go here!</td>
+          <td>The link to your song will go here!</td>
+        </tr>
+       </tbody>  
+      </table>
+      <br>
+      <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/hpRQo0yD-FU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    --></div>
+    <input class="deleteInput" placeholder="Put the number of the song you want to delete here!" size="50">
+    <button class="delete">Delete a Song</button>
+    <button class="localadd">Add your old songs!</button>
+    
+    
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<!--     Your Javascript -->
+    <script type="module" src="js/test.js"></script>
+  </body>
 </html>
+
+
+
+<!--
+- remove all array code
+-->
